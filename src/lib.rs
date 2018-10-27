@@ -9,6 +9,7 @@ mod decode;
 use std::char;
 use std::io::Read;
 use std::fs::File;
+use std::mem;
 
 pub use ::result::*;
 pub use ::model::*;
@@ -670,19 +671,19 @@ impl<'a> ClassReader<'a> {
                 ConstantPoolInfo::Utf8(string)
             },
             3 => {
-                let value = try!(self.read_u32()) as i32;
+                let value = unsafe { mem::transmute::<_, i32>(try!(self.read_u32())) };
                 ConstantPoolInfo::Integer(value)
             },
             4 => {
-                let value = try!(self.read_u32()) as f32;
+                let value = unsafe { mem::transmute::<_, f32>(try!(self.read_u32())) };
                 ConstantPoolInfo::Float(value)
             },
             5 => {
-                let value = try!(self.read_u64()) as i64;
+                let value = unsafe { mem::transmute::<_, i64>(try!(self.read_u64())) };
                 ConstantPoolInfo::Long(value)
             },
             6 => {
-                let value = try!(self.read_u64()) as f64;
+                let value = unsafe { mem::transmute::<_, f64>(try!(self.read_u64())) };
                 ConstantPoolInfo::Double(value)
             },
             7 => {
