@@ -163,7 +163,7 @@ impl<'a> ClassReader<'a> {
                         },
                         _ => panic!("unknown frame type {}", frame_type) // impossible
                     };
-                    entries.push(frame);
+                    entries.push((frame_type, frame));
                 }
                 Attribute::StackMapTable(entries)
             },

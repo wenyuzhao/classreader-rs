@@ -112,7 +112,7 @@ pub enum Attribute {
         exception_table: Vec<Exception>,
         attributes: Vec<Attribute>
     },
-    StackMapTable(Vec<StackMapFrame>),
+    StackMapTable(Vec<(u8, StackMapFrame)>),
     Exceptions { exception_index_table: Vec<u16> },
     InnerClasses { classes: Vec<InnerClass> },
     EnclosingMethod { class_index: u16, method_index: u16 },
