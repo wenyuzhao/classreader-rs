@@ -262,7 +262,7 @@ impl<'a> ClassReader<'a> {
                 Attribute::Deprecated
             },
             "RuntimeVisibleAnnotations" => {
-                let annotations = try!(self.read_annotations(constant_pool));
+                let annotations = try!(self.read_raw_bytes(length as _));
                 Attribute::RuntimeVisibleAnnotations(annotations)
             },
             "RuntimeInvisibleAnnotations" => {
@@ -330,6 +330,14 @@ impl<'a> ClassReader<'a> {
         Result::Ok(info)
     }
 
+    fn read_raw_bytes(self: &mut ClassReader<'a>, length: usize) -> ParseResult<Vec<i8>> {
+        let mut buf = vec![];
+        for _ in 0..length {
+            buf.push(unsafe { ::std::mem::transmute(try!(self.read_u8())) });
+        }
+        Result::Ok(buf)
+    }
+    
     fn read_verification_type_info(self: &mut ClassReader<'a>) -> ParseResult<VerificationType> {
         let tag = try!(self.read_u8());
         let verification_type_info = match tag {

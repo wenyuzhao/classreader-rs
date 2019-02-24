@@ -124,7 +124,7 @@ pub enum Attribute {
     LocalVariableTable(Vec<LocalVariable>),
     LocalVariableTypeTable(Vec<LocalVariable>),
     Deprecated,
-    RuntimeVisibleAnnotations(Vec<Annotation>),
+    RuntimeVisibleAnnotations(Vec<i8>),
     RuntimeInvisibleAnnotations(Vec<Annotation>),
     RuntimeVisibleParameterAnnotations(Vec<Vec<Annotation>>),
     RuntimeInvisibleParameterAnnotations(Vec<Vec<Annotation>>),
