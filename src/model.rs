@@ -130,7 +130,7 @@ pub enum Attribute {
     RuntimeInvisibleParameterAnnotations(Vec<Vec<Annotation>>),
     RuntimeVisibleTypeAnnotations(Vec<TypeAnnotation>),
     RuntimeInvisibleTypeAnnotations(Vec<TypeAnnotation>),
-    AnnotationDefault { element_value: ElementValue },
+    AnnotationDefault(Vec<i8>),
     BootstrapMethods(Vec<BootstrapMethod>),
     MethodParameters(Vec<MethodParameter>),
     Unknown(Vec<u8>)

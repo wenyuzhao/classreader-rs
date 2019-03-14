@@ -286,8 +286,8 @@ impl<'a> ClassReader<'a> {
                 Attribute::RuntimeInvisibleTypeAnnotations(type_annotations)
             },
             "AnnotationDefault" => {
-                let element_value = try!(self.read_element_value(constant_pool));
-                Attribute::AnnotationDefault { element_value: element_value }
+                let annotations = try!(self.read_raw_bytes(length as _));
+                Attribute::AnnotationDefault(annotations)
             },
             "BootstrapMethods" => {
                 let num_bootstrap_methods = try!(self.read_u16());
